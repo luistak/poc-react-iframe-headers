@@ -18,8 +18,7 @@ const fetchRequest = () => {
     return response.blob();
   })
   .then(function(data) {
-    console.log(data);
-    return data;
+    return URL.createObjectURL(data);
   })
   .catch((aa) => {
     console.error(aa);
@@ -34,13 +33,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetchRequest().then(resp => 
-      {
-        this.setState({
-          iframeSrc: URL.createObjectURL(resp)
-        });
-
-      })
+    fetchRequest().then(url => {
+      this.setState({
+        iframeSrc: url 
+      });
+    })
   }
 
   render() {
